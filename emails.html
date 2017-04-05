@@ -1,0 +1,58 @@
+<html>
+    <head>
+        <title>Emails</title>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        
+        
+    </head>
+    
+    <body>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <b>ChoreStore - Emails</b>
+            </div>
+        </div>
+        
+        <p id="bigOne"></p>
+        
+        <script src="https://www.gstatic.com/firebasejs/3.7.2/firebase.js"></script>
+        
+        <script>
+            var config = {
+                apiKey: "AIzaSyA_YCnzg0vy6pVeQ9CgleEZEhxXVc41Noc",
+                authDomain: "chorestore-8885a.firebaseapp.com",
+                databaseURL: "https://chorestore-8885a.firebaseio.com",
+                storageBucket: "chorestore-8885a.appspot.com",
+                messagingSenderId: "363884086940"
+            };
+            firebase.initializeApp(config);
+            
+            
+            var bigOne = document.getElementById('bigOne');
+            var dbRef = firebase.database().ref().child('Emails');
+            dbRef.on('value', function(snapshot) {
+                var array = snapshot.val();
+                var returnText = ""
+                
+                for (var i = 0; i < array.length; i++) {
+                    returnText += (array[i] + "\n");
+                }
+                
+                bigOne.innerText = returnText;
+            });
+        </script>
+    </body>
+    
+    <style>
+        #bigOne{
+            font-family: Consolas;
+            margin-left: 20px;
+        }
+        
+    </style>
+</html>
